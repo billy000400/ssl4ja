@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ssl4ja-pod
+  labels:
+    app: hhh
+spec:
+  containers:
+  - name: container
+    image: gitlab-registry.nrp-nautilus.io/jmduarte/hhh:latest
+    command: ["/bin/bash", "-c", "sleep infinity"]
+    resources:
+      limits:
+        memory: 16Gi
+        cpu: "4"
+        nvidia.com/gpu: "1"
+      requests:
+        memory: 16Gi
+        cpu: "4"
+        nvidia.com/gpu: "1"
+    volumeMounts:
+    - mountPath: /ssl4ja-vol
+      name: ssl4ja-vol
+  volumes:
+    - name: ssl4ja-vol
+      persistentVolumeClaim:
+        claimName: ssl4ja-vol
